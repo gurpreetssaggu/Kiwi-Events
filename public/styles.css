@@ -1,0 +1,94 @@
+/* assets/styles.css */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  
+  /* Example hover effect for cards */
+  .card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s;
+  }
+  
+  /* Additional custom styles for a unique feel */.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
+
+/* Stylish Sort Button */
+.btn-sort {
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  border: none;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 30px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(255, 65, 108, 0.5);
+}
+
+.btn-sort:hover {
+  background: linear-gradient(45deg, #ff4b2b, #ff416c);
+  box-shadow: 0 6px 20px rgba(255, 65, 108, 0.7);
+  transform: scale(1.05);
+}
+
+/* Animated Dropdown */
+.dropdown-animated {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Dropdown Item Styles */
+.dropdown-menu .dropdown-item {
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #ff4b2b;
+  color: white;
+  transform: translateX(5px);
+}
+
+/* Keyframe Animation for Dropdown */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Secondary Sort Dropdown */
+#secondarySortContainer .dropdown {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+#secondarySortContainer .btn {
+  background: linear-gradient(45deg, #2196F3, #1E88E5);
+  border: none;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 30px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.5);
+}
+
+#secondarySortContainer .btn:hover {
+  background: linear-gradient(45deg, #1E88E5, #2196F3);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.7);
+  transform: scale(1.05);
+}
+
