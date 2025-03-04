@@ -91,6 +91,4 @@ The server runs on `http://localhost:5001` by default.
 - `login.html` - User login
 - `verify-otp.html` - OTP verification page
 
-## License
-This project is licensed under the MIT License.
 
