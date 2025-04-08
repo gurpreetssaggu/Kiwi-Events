@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <title>Login - Kiwi Events</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Animate.css for animations -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background: linear-gradient(135deg, #fdfcfd, #ebecef);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+
+
+
+      
+      align-items: center;
+      color: #fff;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    #loginForm {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      margin-top: 80px; /* To account for the fixed navbar */
+    }
+
+    #loginForm .form-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    #loginForm .form-control {
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 1rem;
+    }
+
+    #loginForm .btn-primary {
+      background: #2575fc;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    #loginForm .btn-primary:hover {
+      background: #6a11cb;
+    }
+
+    #loginForm .btn-secondary {
+      background: #6c757d;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    #loginForm .btn-secondary:hover {
+      background: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Kiwi Events</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="create-event.html">Create Event</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="master-calendar.html">Master Calendar</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" href="signup.html">Sign Up</a>
+            <li class="nav-item" id="adminNav" style="display: none;">
+              <a class="nav-link" href="admin.html">Admin Panel</a>
+          </li>
+          <li class="nav-item" id="loginNav">
+              <a class="nav-link" href="login.html">Login</a>
+          </li>
+          <li class="nav-item" id="logoutNav" style="display: none;">
+              <a class="nav-link" href="#" id="logoutBtn">Logout</a>
+          </li>
+          
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Login Form -->
+  <form id="loginForm" class="animate__animated animate__fadeInUp">
+    <h2 class="text-center mb-4" style="color: #333;">Login to Your Account</h2>
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="loginEmail" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="loginEmail" name="email" placeholder="Enter your email" required>
+    </div>
+    <!-- Password -->
+    <div class="mb-3">
+      <label for="loginPassword" class="form-label">Password</label>
+      <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Enter your password" required>
+    </div>
+    <!-- Login Button -->
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+  </form>
+
+  <div class="social-login mt-3">
+    <p class="text-center" style="color: #333;">Or log in with:</p>
+    <a href="/api/auth/google" class="btn btn-danger w-100 mb-2">Login with Google</a>
+    <a href="/api/auth/facebook" class="btn btn-primary w-100">Login with Facebook</a>
+  </div>
+
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+  
+  <!-- Inline JavaScript for Login Form -->
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        email: document.getElementById("loginEmail").value.trim(),
+        password: document.getElementById("loginPassword").value
+    };
+
+    try {
+        const response = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            // ✅ Store token and admin status
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("userId", data.userId);
+            localStorage.setItem("isAdmin", data.isAdmin);
+
+            Swal.fire({
+                icon: "success",
+                title: "Login Successful!",
+                text: "Redirecting...",
+                timer: 1500,
+                showConfirmButton: false
+            });
+
+            setTimeout(() => window.location.href = "index.html", 1500);
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Login Failed",
+                text: data.message
+            });
+        }
+    } catch (error) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Something went wrong. Please try again."
+        });
+    }
+});
+
+
+  </script>
+</body>
+</html>

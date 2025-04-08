@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Sign Up - Kiwi Events</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Animate.css for animations -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background: linear-gradient(135deg, #f4f4f4, #f3f4f4);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    #signupForm {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      margin-top: 80px; /* To account for the fixed navbar */
+    }
+
+    #signupForm .form-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    #signupForm .form-control {
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 1rem;
+    }
+
+    #signupForm .btn-primary {
+      background: #2575fc;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    #signupForm .btn-primary:hover {
+      background: #6a11cb;
+    }
+
+    #signupForm .btn-secondary {
+      background: #6c757d;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    #signupForm .btn-secondary:hover {
+      background: #5a6268;
+    }
+
+    #otpSection {
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Kiwi Events</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="events.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="create-event.html">Create Event</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="saved-events.html">Saved Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="master-calendar.html">Master Calendar</a></li>
+          
+            <a class="nav-link active" href="signup.html">Sign Up</a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Sign Up Form -->
+  <form id="signupForm" class="animate__animated animate__fadeInUp">
+    <h2 class="text-center mb-4" style="color: #333;">Sign Up</h2>
+    <!-- Name -->
+    <div class="mb-3">
+        <label for="username" class="form-label">Name</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <!-- Email -->
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+        <button type="button" id="sendOtpBtn" class="btn btn-secondary mt-2 w-100">Send OTP</button>
+    </div>
+    <!-- OTP Verification -->
+    <div class="mb-3" id="otpSection" style="display: none;">
+        <label for="otp" class="form-label">Enter OTP</label>
+        <input type="text" class="form-control" id="otp" name="otp" required>
+    </div>
+    <!-- Password -->
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <!-- Confirm Password -->
+    <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    <!-- Sign Up Button -->
+    <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+  </form>
+
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+  
+  <!-- Inline JavaScript for Sign Up Form -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sendOtpBtn = document.getElementById("sendOtpBtn");
+      const otpSection = document.getElementById("otpSection");
+
+      if (sendOtpBtn) {
+          sendOtpBtn.addEventListener("click", async () => {
+              const email = document.getElementById("email").value.trim();
+
+              if (!email) {
+                  alert("Please enter an email.");
+                  return;
+              }
+
+              console.log("Sending OTP request for:", email); // ✅ Debugging
+
+              try {
+                  const response = await fetch("/api/auth/send-otp", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ email })
+                  });
+
+                  console.log("OTP Response:", response); // ✅ Debugging
+                  const data = await response.json();
+
+                  if (response.ok) {
+                      otpSection.style.display = "block"; // ✅ Show OTP input
+                      alert("OTP sent successfully! Check your email.");
+                  } else {
+                      alert("Error: " + data.message);
+                  }
+              } catch (error) {
+                  console.error("Error sending OTP:", error);
+              }
+          });
+      }
+    });
+
+    document.getElementById("signupForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = {
+        username: document.getElementById("username").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        password: document.getElementById("password").value,
+        confirmPassword: document.getElementById("confirmPassword").value,
+        otp: document.getElementById("otp").value.trim()
+    };
+
+    try {
+        const response = await fetch("/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            Swal.fire({
+                icon: "success",
+                title: "Sign-Up Successful!",
+                text: "Redirecting to login...",
+                confirmButtonColor: "#28a745",
+                timer: 2000,
+                showConfirmButton: false
+            });
+
+            setTimeout(() => window.location.href = "login.html", 2000);
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: data.message,
+                confirmButtonColor: "#d33"
+            });
+        }
+    } catch (error) {
+        console.error("Sign-up Error:", error);
+        Swal.fire({
+            icon: "error",
+            title: "Sign-Up Failed",
+            text: "Something went wrong. Please try again.",
+            confirmButtonColor: "#d33"
+        });
+    }
+});
+
+  </script>
+</body>
+</html>
